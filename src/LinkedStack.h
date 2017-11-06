@@ -8,6 +8,8 @@
 #ifndef LINKEDSTACK_H_
 #define LINKEDSTACK_H_
 
+#include <iostream>
+
 template <class T>
 struct Node{
     T& data;
@@ -24,6 +26,8 @@ class LinkedStack{
 	public:
 	LinkedStack();
 	~LinkedStack();
+
+	void deleteAll();
 
 	bool isEmpty();
     void push(T&);
@@ -43,8 +47,15 @@ LinkedStack<T>::LinkedStack(){
 
 template<class T>
 LinkedStack<T>::~LinkedStack(){
-	while(top != 0){
-		pop();
+	deleteAll();
+}
+
+//deletes all data in the stack
+template<class T>
+void LinkedStack<T>::deleteAll(){
+	while(!isEmpty()){
+		T data = pop();
+		delete &data;
 	}
 }
 
